@@ -44,6 +44,15 @@
     .create-button:hover {
       background-color: #2ecc71;
     }
+    .back-button {
+            background-color: #3498db;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #2980b9;
+        }
   </style>
 </head>
 
@@ -92,7 +101,7 @@ if (!empty($_POST)) {
       </div>
       <button type="submit" class="btn btn-danger btn-block create-button">Create Account</button>
       <input type="hidden" name="source" value="admin">
-      <a href="index.php" class="btn btn-light btn-block mt-2">Back</a>
+      <a href="index.php" class="btn btn-light btn-block mt-2 back-button">Back</a>
     </form>
   </div>
 </body>
