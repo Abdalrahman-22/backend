@@ -35,13 +35,13 @@
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
     }
 
-    .login-button {
+    .create-button {
       background-color: #e74c3c;
       border: none;
       transition: background-color 0.3s;
     }
 
-    .login-button:hover {
+    .create-button:hover {
       background-color: #c0392b;
     }
   </style>
@@ -90,7 +90,7 @@ if (!empty($_POST)) {
           <option value="admin">Admin</option>
         </select>
       </div>
-      <button type="submit" class="btn btn-danger btn-block login-button">Create Account</button>
+      <button type="submit" class="btn btn-danger btn-block create-button">Create Account</button>
       <input type="hidden" name="source" value="admin">
       <a href="index.php" class="btn btn-light btn-block mt-2">Back</a>
     </form>
