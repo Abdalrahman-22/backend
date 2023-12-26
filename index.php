@@ -94,7 +94,6 @@
           <input type="password" class="form-control" id="password" placeholder="Password"name="password" required>
         </div>
         <button type="submit" class="btn btn-danger btn-block login-button" value="Login" >Login</button>
-        <a href="create_user.php" class="create-account-link">Create an account</a>
 
       </form>
     </div>
