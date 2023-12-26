@@ -6,7 +6,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 </head>
 
@@ -34,15 +34,11 @@
 		$query1 = data::getAll();
 
 		echo "<table class='table table-hover'>";
-		echo "<tr><th>name</th><th>email</th><th>password</th><th>role</th><th >profile picture</th><th>actions</th><th>actions</th></tr>";
+		echo "<tr><th>name</th><th>email</th><th>password</th><th>role</th><th>actions</th><th>actions</th></tr>";
 		while ($row = $query1->fetch()) {
-			$query2 = data::getAllFiles($row['name']);// to get the photo of the user
 
-			echo "<tr><td>{$row['name']}</td><td>{$row['email']}</td><td>{$row['password']}</td><td>{$row['role']}</td>";
-			echo "<td>";
-			$row2 = $query2->fetch();
-			echo "<a class='btn' href='../files/{$row2['url']}'> {$row2['url']} </a>&nbsp;&nbsp;";
-			echo "</td>";
+			echo "<tr><td>{$row['name']}</td><td>{$row['email']}</td><td>***</td><td>{$row['role']}</td>";
+
 			echo "<td>";
 			?>
 			<form action="" method="post" onsubmit="return confirm('are you sure to delete')">

@@ -7,13 +7,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
 <?php
 require_once("../Class.data.php");
 
 if (!empty($_POST['submit']) && $_POST['submit'] == 'Save') {
-    $test = data::updateuser($_POST['name'], $_POST['email'], $_POST['password'], $_POST['role'], $_FILES['photo']);
+    $test = data::updateuser($_POST['name'], $_POST['email'], $_POST['password'], $_POST['role']);
 
     if ($test) {
         Tools::printSuccess("Updated Successfully <a href ='index.php'>Go back</a>");
@@ -26,8 +26,6 @@ if (!empty($_POST['submit']) && $_POST['submit'] == 'Save') {
 
 $usrinfo = data::getallinfo($_POST['name']); // get user info
 $row = $usrinfo->fetch();
-$query2 = data::getAllFiles($row['name']); // get user photo
-$row2 = $query2->fetch();
 
 ?>
 
@@ -46,7 +44,7 @@ $row2 = $query2->fetch();
         <label>Username:</label>
         <input type="text" name="name" required value="<?php echo $row['name']; ?>" readonly="readonly">
         <label>Password:</label>
-        <input type="text" name="password" required value="<?php echo $row['password']; ?>">
+        <input type="password" name="password">
         <label>Email:</label>
         <input type="email" name="email" required value="<?php echo $row['email']; ?>">
         <label>Role:</label>
@@ -56,11 +54,7 @@ $row2 = $query2->fetch();
             <option value="admin" <?php if ($row['role'] == "admin")
                 echo "selected"; ?>>Admin</option>
         </select>
-        <label>Photo:</label>
-        <?php
-        echo "<a class='btn' href='../files/{$row2['url']}'> {$row2['url']} </a>&nbsp;&nbsp;";
-        ?>
-        <input type="file" name="photo" >
+      
         <input type="submit" name="submit" value="Save">
         <input type="hidden" name="source" value="admin">
         <a href="del.php" class="have-account-link">back</a>

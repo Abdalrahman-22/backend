@@ -15,7 +15,7 @@
   require_once("Class.data.php");
   require_once("Class.Tools.php");
 
-  $test = data::addNew($_POST['username'], $_POST['email'], $_POST['password'], $_POST['role'],$_FILES["photo"]);
+  $test = data::addNew($_POST['username'], $_POST['email'], $_POST['password'], $_POST['role']);
 
   if ($test)
     Tools::printSuccess("one record has inserted");
@@ -38,8 +38,6 @@
       <option value="normal">normal</option>
       <option value="admin">Admin</option>
     </select>
-    <label>Photo:</label>
-    <input type="file" name="photo" required>
     <input type="submit" value="Create Account">
     <input type="hidden" name="source" value="main">
     <a href="index.php" class="have-account-link">i have an account</a>

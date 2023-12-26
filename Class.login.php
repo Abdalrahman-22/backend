@@ -3,41 +3,41 @@ require_once("Class.Tools.php");
 
 class login
 {
-	static function checkIn($userName, $password)
-	{
+    static function checkIn($userName, $password)
+    {
+        session_start();
 
-		$userName = Tools::cleanData($userName);
-		$password = (Tools::cleanData($password));
+        $userName = Tools::cleanData($userName);
+        $password = Tools::cleanData($password);
 
+        $pdo = Database::connect();
+        $sql = "SELECT * FROM user WHERE name = ?";
+        $q = $pdo->prepare($sql);
+        $q->execute(array($userName));
 
-		$pdo = Database::connect();
-		$sql = "select * FROM user  WHERE name = ? and password = ? ";
-		$q = $pdo->prepare($sql);
-		$q->execute(array($userName, $password));
-		echo ($q->rowCount());
+        if ($q->rowCount() > 0) {
+            $row = $q->fetch(PDO::FETCH_ASSOC);
 
-		if (($q->rowCount()) > 0) {
-			$result = $q->fetch(PDO::FETCH_ASSOC);
-			session_start();
-			$_SESSION['login'] = true;
-			$_SESSION['userName'] = $result['name'];
-			$_SESSION['role'] = $result['role'];
-			Database::disconnect();
+            if (password_verify($password, $row['password'])) { // password verify gets the hash of $password
+                $_SESSION['login'] = true;
+                $_SESSION['userName'] = $row['name'];
+                $_SESSION['role'] = $row['role'];
 
-			if ($_SESSION['role'] == "normal") {
-				header("Location: normal/");
-			} else if ($_SESSION['role'] == "admin") {
-				header("Location: admin/");
+                Database::disconnect();
 
-			} else {
-				header("location: index.php?loginError=1");
-			}
-
-
-		} else {
-			header("location: index.php?loginError=1");
-		}
-	}
+                if ($_SESSION['role'] == "normal") {
+                    header("Location: normal/");
+                } elseif ($_SESSION['role'] == "admin") {
+                    header("Location: admin/");
+                } else {
+                    header("Location: index.php?loginError=1");
+                }
+            } else {
+                header("Location: index.php?loginError=1");
+            }
+        } else {
+            header("Location: index.php?loginError=1");
+        }
+    }
 }
-
 ?>
