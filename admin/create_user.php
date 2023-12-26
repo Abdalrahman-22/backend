@@ -100,7 +100,6 @@ if (!empty($_POST)) {
         </select>
       </div>
       <button type="submit" class="btn btn-danger btn-block create-button">Create Account</button>
-      <input type="hidden" name="source" value="admin">
       <a href="index.php" class="btn btn-light btn-block mt-2 back-button">Back</a>
     </form>
   </div>

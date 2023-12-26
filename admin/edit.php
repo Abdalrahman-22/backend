@@ -108,7 +108,6 @@ $row = $usrinfo->fetch();
                 </select>
             </div>
             <button type="submit" class="btn btn-danger btn-block save-button" name="submit" value="Save">Save</button>
-            <input type="hidden" name="source" value="admin">
             <a href="del.php" class="btn btn-light btn-block mt-2 back-button">Back</a>
         </form>
     </div>
