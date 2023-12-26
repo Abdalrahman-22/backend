@@ -20,7 +20,7 @@
     }
 
     #createuser-section {
-      max-width: 400px;
+      max-width: 330px;
       width: 100%;
       margin-top: 50px;
       padding: 20px;
@@ -36,13 +36,13 @@
     }
 
     .create-button {
-      background-color: #e74c3c;
+      background-color: #27ae60;
       border: none;
       transition: background-color 0.3s;
     }
 
     .create-button:hover {
-      background-color: #c0392b;
+      background-color: #2ecc71;
     }
   </style>
 </head>
