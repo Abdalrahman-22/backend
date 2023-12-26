@@ -6,19 +6,23 @@ class data
 {
 	static function addNew($name, $email, $password, $role)
 	{
-		$name = Tools::cleanData($name);
-		$email = Tools::cleanData($email);
-		$password = Tools::cleanData($password);
-		$role = Tools::cleanData($role);
-		$password = password_hash($password, PASSWORD_DEFAULT);
-
-		$pdo = Database::connect();
-		$query = $pdo->prepare("insert into user (name,email,password,role) values(?,?,?,?)");
-		$test = $query->execute(array($name, $email, $password, $role));
-		Database::disconnect();
-		return $test;
-
+		try {
+			$name = Tools::cleanData($name);
+			$email = Tools::cleanData($email);
+			$password = Tools::cleanData($password);
+			$role = Tools::cleanData($role);
+			$password = password_hash($password, PASSWORD_DEFAULT);
+	
+			$pdo = Database::connect();
+			$query = $pdo->prepare("insert into user (name,email,password,role) values(?,?,?,?)");
+			$test = $query->execute(array($name, $email, $password, $role));
+			Database::disconnect();
+			return $test;
+		} catch (PDOException $e) {
+			return $e->getMessage(); 
+		}
 	}
+	
 
 	static function delete($name)
 	{

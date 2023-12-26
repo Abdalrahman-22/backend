@@ -6,20 +6,21 @@
   <link href="style/ccs.css" rel="stylesheet" type="text/css">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <?php
 
-if ( !empty($_POST)){
+if (!empty($_POST)) {
   require_once("../Class.data.php");
   require_once("../Class.Tools.php");
+  $result = data::addNew($_POST['username'], $_POST['email'], $_POST['password'], $_POST['role']);
+  if ($result === true) {
+    Tools::printSuccess("One record has been inserted successfully.");
+  } else {
+    Tools::printError("Unexpected result: " . var_export($result, true));
+  }
 
-  $test = data::addNew($_POST['username'], $_POST['email'], $_POST['password'], $_POST['role']);
-  if ($test)
-    Tools::printSuccess("one record has inserted");
-  else
-    Tools::printError("some error occured");
 }
 ?>
 
