@@ -25,7 +25,7 @@ class login
 
                 Database::disconnect();
 
-                if ($_SESSION['role'] == "normal") {
+                if (strpos($_SESSION['role'], 'normal') !== false) {
                     header("Location: normal/");
                 } elseif ($_SESSION['role'] == "admin") {
                     header("Location: admin/");

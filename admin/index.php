@@ -21,7 +21,8 @@
     .container {
       text-align: center;
       padding: 20px;
-      max-width: 80%; /* Adjusted max-width for responsiveness */
+      max-width: 80%;
+      /* Adjusted max-width for responsiveness */
     }
 
     h1 {
@@ -48,7 +49,8 @@
       margin-bottom: 10px;
       padding: 10px;
       border-radius: 5px;
-      width: 100%; /* Default width for all devices */
+      width: 100%;
+      /* Default width for all devices */
     }
 
     .btn {
@@ -56,24 +58,28 @@
       padding: 10px;
       border-radius: 28px;
       display: block;
-      
+
     }
 
     /* Different background colors for buttons */
     .btn1 {
-      background-color: #3498db; /* Blue */
+      background-color: #3498db;
+      /* Blue */
     }
 
     .btn2 {
-      background-color: #e67e22; /* Orange */
+      background-color: #e67e22;
+      /* Orange */
     }
 
     .btn3 {
-      background-color: #2ecc71; /* Green */
+      background-color: #2ecc71;
+      /* Green */
     }
 
     .btn4 {
-      background-color: #e74c3c; /* Red */
+      background-color: #e74c3c;
+      /* Red */
     }
 
     /* Improve button style */
@@ -84,7 +90,8 @@
     /* Media query for smaller screens (phones) */
     @media (max-width: 576px) {
       a {
-        width: 100%; /* Set width to 100% for smaller screens (phones) */
+        width: 100%;
+        /* Set width to 100% for smaller screens (phones) */
       }
 
     }
@@ -92,27 +99,29 @@
     /* Media query for larger screens (PCs) */
     @media (min-width: 992px) {
       .btn {
-        width: 30%; /* Set width to 30% for larger screens (PCs) */
+        width: 30%;
+        /* Set width to 30% for larger screens (PCs) */
         display: block;
         margin-bottom: 10px;
 
       }
-         /* Different background colors for buttons */
-    .btn1 {
-      width: 30%;
-    }
 
-    .btn2 {
-      width: 27%;
-    }
+      /* Different background colors for buttons */
+      .btn1 {
+        width: 30%;
+      }
 
-    .btn3 {
-      width: 23%;
-    }
+      .btn2 {
+        width: 27%;
+      }
 
-    .btn4 {
-      width: 18%;
-    }
+      .btn3 {
+        width: 23%;
+      }
+
+      .btn4 {
+        width: 18%;
+      }
 
     }
   </style>
@@ -121,25 +130,27 @@
 <body>
   <div class="container mt-5">
     <?php
-      session_start();
-      if ($_SESSION['login'] == false || !(in_array($_SESSION['role'], array('admin')))) {// the second condition is !$_SESSION['role']=="admin"
-        header("location: ../index.php?loginError=1");
-        exit;
-      }
+    session_start();
+    if ($_SESSION['login'] == false || !(in_array($_SESSION['role'], array('admin')))) { // the second condition is !$_SESSION['role']=="admin"
+      header("location: ../index.php?loginError=1");
+      exit;
+    }
     ?>
 
     <h1>This is Admin Page</h1>
     <div id="info">
-      <div>Welcome: <?php echo $_SESSION['userName']?></div>
+      <div>Welcome:
+        <?php echo $_SESSION['userName'] ?>
+      </div>
       <div id="clock"></div>
       <div>Temperature: <span id="temperature">25°C</span>, Humidity: <span id="humidity">50%</span></div>
     </div>
 
     <a href="del.php" class="btn btn-primary custom-button btn1">Edit Users</a>
     <a href="create_user.php" class="btn btn-secondary custom-button btn2">Add User</a>
-    <a href="http://192.168.8.101/room1" class="btn btn-info custom-button btn3">MY Room</a>
     <a href="http://192.168.8.101/room1" class="btn btn-info custom-button btn3">Room 1</a>
     <a href="http://192.168.8.101/room2" class="btn btn-info custom-button btn3">Room 2</a>
+    <a href="http://192.168.8.101/room3" class="btn btn-info custom-button btn3">Room 3</a>
     <a href="../logout.php" class="btn btn-danger custom-button btn4">Logout</a>
 
   </div>
@@ -160,5 +171,5 @@
     // Update temperature and humidity (placeholders in this example)
     function updateTempHumidity() {
       document.getElementById('temperature').innerText = '25°C'; // Placeholder, replace with real data
-      document.getElementById('humidity').innerText="10%";
-	}
+      document.getElementById('humidity').innerText = "10%";
+    }
