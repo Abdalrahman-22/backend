@@ -44,23 +44,66 @@
     .create-button:hover {
       background-color: #2ecc71;
     }
-    .back-button {
-            background-color: #3498db;
-            border: none;
-            transition: background-color 0.3s;
-        }
 
-        .back-button:hover {
-            background-color: #2980b9;
-        }
+    .back-button {
+      background-color: #3498db;
+      border: none;
+      transition: background-color 0.3s;
+    }
+
+    .back-button:hover {
+      background-color: #2980b9;
+    }
+
+    /* Added style for checkboxes */
+    .checkbox-group {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .checkbox-group label {
+      flex-basis: 30%;
+    }
   </style>
 </head>
+
+<script>
+    $(document).ready(function () {
+      $("#role").change(function () {
+        if ($(this).val() === "normal") {
+          $(".checkbox-group input").prop("disabled", false);
+          $(".checkbox-group ").show();
+          $(".allowed_rooms").show();
+        } else {
+          $(".checkbox-group input").prop("disabled", true);
+          $(".checkbox-group ").hide();
+          $(".allowed_rooms").hide();
+        }
+      });
+    });
+</script>
+
 
 <?php
 if (!empty($_POST)) {
   require_once("../Class.data.php");
   require_once("../Class.Tools.php");
-  $result = data::addNew($_POST['username'], $_POST['email'], $_POST['password'], $_POST['role']);
+  
+  $allowedRoomsString = "";
+  
+  if (isset($_POST['room1'])) {
+    $allowedRoomsString = $allowedRoomsString.$_POST['room1'];
+  }
+  if (isset($_POST['room2'])) {
+    $allowedRoomsString = $allowedRoomsString.$_POST['room2'];
+  }
+  if (isset($_POST['room3'])) {
+    $allowedRoomsString = $allowedRoomsString.$_POST['room3'];
+  }
+  $roleWithRooms = $_POST['role'] . '' . $allowedRoomsString;
+
+  $result = data::addNew($_POST['username'], $_POST['email'], $_POST['password'], $roleWithRooms);
+
   if ($result === true) {
     Tools::printSuccess("One record has been inserted successfully.");
   } else {
@@ -68,6 +111,7 @@ if (!empty($_POST)) {
   }
 }
 ?>
+
 
 <body>
   <?php
@@ -98,6 +142,14 @@ if (!empty($_POST)) {
           <option value="normal">Normal</option>
           <option value="admin">Admin</option>
         </select>
+      </div>
+      <div class="form-group allowed_rooms">
+        <label>Allowed Rooms:</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" id="room1" name="room1" value="1"> Room 1</label>
+          <label><input type="checkbox" id="room2" name="room2" value="2"> Room 2</label>
+          <label><input type="checkbox" id="room3" name="room3" value="3"> Room 3</label>
+        </div>
       </div>
       <button type="submit" class="btn btn-danger btn-block create-button">Create Account</button>
       <a href="index.php" class="btn btn-light btn-block mt-2 back-button">Back</a>

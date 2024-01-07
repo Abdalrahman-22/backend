@@ -88,9 +88,14 @@
 		$query1 = data::getAll();
 		echo "<div class='table-responsive'>";
 		echo "<table class='table table-hover'>";
-		echo "<thead><tr><th>Name</th><th>Email</th><th>Password</th><th>Role</th><th>Actions</th><th>Actions</th></tr></thead>";
+		echo "<thead><tr><th>Name</th><th>Email</th><th>Password</th><th>Role</th><th>Rooms</th><th>Actions</th><th>Actions</th></tr></thead>";
 		while ($row = $query1->fetch()) {
-			echo "<tr><td>{$row['name']}</td><td>{$row['email']}</td><td>***</td><td>{$row['role']}</td>";
+			$role= preg_replace("/[^a-zA-Z]/", "", $row['role']);// extract the role wheather is admin or normal
+			$rooms=preg_replace("/[^1-9]/", "", $row['role']);// extracts allowed rooms for normal
+			$rooms = implode(',', str_split($rooms));// split between rooms numbers with a ,
+			$rooms = ($rooms==""&&$role=="normal")?"nothing": $rooms;// in case it is normal and has access to no rooms
+			$rooms = ($rooms==""&&$role=="admin")?"all rooms": $rooms;// in case he is an admin
+			echo "<tr><td>{$row['name']}</td><td>{$row['email']}</td><td>***</td><td>" .$role. "</td><td>". $rooms."</td>";
 			echo "<td>";
 			?>
 			<form action="" method="post" onsubmit="return confirm('Are you sure to delete?')">
